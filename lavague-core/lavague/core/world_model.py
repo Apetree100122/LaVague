@@ -7,6 +7,7 @@ from llama_index.core import SimpleDirectoryReader
 from lavague.core.context import Context, get_default_context
 from lavague.core.logger import AgentLogger, Loggable
 from functools import lru_cache
+from PIL import Image
 import time
 import yaml
 
@@ -373,6 +374,7 @@ class WorldModel(ABC, Loggable):
                 "world_model_prompt": prompt,
                 "world_model_output": mm_llm_output,
                 "world_model_inference_time": world_model_inference_time,
+                "screenshots": [Image.open(image_document.image_path) for image_document in image_documents]
             }
             logger.add_log(log)
 
